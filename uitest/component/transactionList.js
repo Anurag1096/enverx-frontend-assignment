@@ -3,19 +3,35 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import SkeletonComp from './Skeleton';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Link from 'next/link';
 import BasicModal from './Modal';
-const TransactionList = ({ ItemArr, HeaderList, loading }) => {
+import { useDispatch } from 'react-redux';
+import { saveOneExpense } from '@/features/expense/expenseSlice';
+import { db } from "@/firebase";
+import { doc,deleteDoc } from "firebase/firestore";
+const TransactionList = ({ ItemArr ,HeaderList, loading ,handleSearch}) => {
     const router=useRouter();
     const [open,setOpen]=useState(false)
-    const handleRoute=()=>{
+    const [toDelete,setToDelete] = useState(0);
+    const dispatch=useDispatch()
+    const handleRoute=(index)=>{
+        console.log("logging",ItemArr[index])
+        dispatch(saveOneExpense(ItemArr[index]))
         router.push("/editExpenses")
     }
     
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (index) => {
+        setToDelete(ItemArr[index])
+        setOpen(true)};
     const handleClose = () => setOpen(false);
     const handleDelete=()=>{
-         setOpen(true)
+         const docRef=doc(db,"expenseData",toDelete.id)
+        deleteDoc(docRef).then(()=>
+        {
+         setOpen(false)
+    })
+        .catch(error=>{
+            console.log(error)
+        })
     }
     const renderList = ItemArr.map((item,index) => {
 
@@ -37,8 +53,8 @@ const TransactionList = ({ ItemArr, HeaderList, loading }) => {
                     <TableCell>{item.data.date.seconds?item.data.date.seconds:item.data.date}</TableCell>
                     <TableCell>{item.data.description}</TableCell>
                     <TableCell>{item.data.amount}</TableCell>
-                    <TableCell sx={{cursor:'pointer'}} onClick={handleRoute}>Edit</TableCell>
-                    <TableCell sx={{cursor:'pointer'}} onClick={handleDelete}>Delete</TableCell>
+                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleRoute(index)}>Edit</TableCell>
+                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleOpen(index)}>Delete</TableCell>
                 </TableRow>)
             }
         </>)

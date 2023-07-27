@@ -3,7 +3,7 @@ import { TextField, Container } from '@mui/material';
 import CustomButtons from './Button';
 import {useRouter} from 'next/router';
 const EditTransaction=({handleSubmit,handleSetFormData,formData})=>{
-    const router = useRouter();
+    const router = useRouter(); 
     function handleCancel(){
         router.push("/")
     }
