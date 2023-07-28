@@ -48,8 +48,9 @@ export default function Home() {
       <main className={inter}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <h1>Expense Tracking Tabs</h1>
+          
         </div>
-        {/* <TabsComponent value={TabNum} getData={getData} setValue={setTabNum} ItemArr={listItems} setItemsArr={setListItems} HeaderList={TableHeadList} loading={loading} setLoading={setLoading} /> */}
+        <TabsComponent value={TabNum} getData={getData} setValue={setTabNum} ItemArr={listItems} setItemsArr={setListItems} HeaderList={TableHeadList} loading={loading} setLoading={setLoading} />
       </main>
     </>
   )

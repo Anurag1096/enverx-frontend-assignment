@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { saveOneExpense } from '@/features/expense/expenseSlice';
 import { db } from "@/firebase";
 import { doc,deleteDoc } from "firebase/firestore";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 const TransactionList = ({ ItemArr ,HeaderList, loading ,handleSearch}) => {
     const router=useRouter();
     const [open,setOpen]=useState(false)
@@ -53,8 +55,8 @@ const TransactionList = ({ ItemArr ,HeaderList, loading ,handleSearch}) => {
                     <TableCell>{item.data.date.seconds?item.data.date.seconds:item.data.date}</TableCell>
                     <TableCell>{item.data.description}</TableCell>
                     <TableCell>{item.data.amount}</TableCell>
-                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleRoute(index)}>Edit</TableCell>
-                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleOpen(index)}>Delete</TableCell>
+                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleRoute(index)}><EditIcon fontSize='small'/></TableCell>
+                    <TableCell sx={{cursor:'pointer'}} onClick={()=>handleOpen(index)}><DeleteIcon fontSize='small'/></TableCell>
                 </TableRow>)
             }
         </>)
@@ -64,9 +66,9 @@ const TransactionList = ({ ItemArr ,HeaderList, loading ,handleSearch}) => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        {HeaderList.map((item) => {
+                        {HeaderList.map((item,index) => {
                             return (<>
-                                <TableCell key={item} sx={{ fontWeight: 'bold', color: 'text.secondary' }}>{item}</TableCell>
+                                <TableCell key={item.index} sx={{ fontWeight: 'bold', color: 'text.secondary' }}>{item}</TableCell>
 
                             </>)
                         })}

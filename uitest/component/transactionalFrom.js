@@ -44,6 +44,7 @@ const TransactionalForm = ({handleSubmit,handleSetFormData,formData}) => {
                   <TextField
                     fullWidth
                     margin="normal"
+                    type="number"
                     required
                     id="amount"
                     onChange={handleSetFormData}

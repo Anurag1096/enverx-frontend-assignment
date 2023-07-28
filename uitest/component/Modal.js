@@ -32,12 +32,12 @@ export default function BasicModal({name,open,handleClose,handleOpen,handleFunct
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography data-testid="modal-content" id="modal-modal-title" variant="h6" component="h2">
             Are you sure you want to delete this transaction?
           </Typography>
             <Container sx={{display:"flex" , justifyContent:"end" , marginTop:2 }}>
-            <CustomButtons name={"Delete"} sx={{bgcolor:"red",margin:1,  }} onClick={handleFunction}/>
-            <CustomButtons name={"Cancel"} sx={{bgcolor:"blue",margin:1}} onClick={handleClose}/>
+            <CustomButtons name={"Delete"} sx={{bgcolor:"red",margin:1,'&hover':{ bgcolor:"red"},  }} onClick={handleFunction}/>
+            <CustomButtons data-testid="cancel-button" name={"Cancel"} sx={{bgcolor:"blue",margin:1}} onClick={handleClose}/>
 
             </Container>
         </Box>

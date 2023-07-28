@@ -9,7 +9,9 @@ describe("Button Component",()=>{
         render(<Button/>)
         const buttonElement= screen.getByRole('button');
         expect(buttonElement).toBeEnabled();
-    })
+    });
+
+    
 })
 
 

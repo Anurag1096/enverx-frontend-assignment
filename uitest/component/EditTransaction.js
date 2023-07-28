@@ -50,6 +50,7 @@ const EditTransaction=({handleSubmit,handleSetFormData,formData})=>{
                     fullWidth
                     margin="normal"
                     required
+                    type="number"
                     id="amount"
                     onChange={handleSetFormData}
                     value={formData.amount}
